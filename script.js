@@ -1,6 +1,5 @@
 const openFormButton = document.querySelector('.profile__button_edit');
 const popup = document.querySelector('.popup');
-const overlay = document.querySelector('.popup__overlay');
 const closeButton = popup.querySelector('.popup__close-button');
 const form = document.querySelector('.popup__form');
 
@@ -18,12 +17,10 @@ function toggleForm() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
   popup.classList.add('popup_visible');
-  overlay.classList.add('popup__overlay_active');
 }
 
 function closeForm() {
   popup.classList.remove('popup_visible');
-  overlay.classList.remove('popup__overlay_active');
 }
 
 function handleFormSubmit(event) {
@@ -33,3 +30,4 @@ function handleFormSubmit(event) {
 }
 
 form.addEventListener('submit', handleFormSubmit); 
+form.addEventListener('submit', closeForm); 

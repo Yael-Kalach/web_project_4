@@ -5,6 +5,7 @@
     transition: 0.1s linear 0.1s;
     border: 2px solid #FFFFFF;
     margin: 0 0 0 18px;
+    position: relative;
 }
 
 .profile__button_edit:hover {
