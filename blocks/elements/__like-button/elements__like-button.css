@@ -1,0 +1,7 @@
+.elements__like-button {
+    background: url(../../../images/icons/like-heart/active.svg) center no-repeat;
+}
+
+.elements__like-button:hover {
+opacity: 0.6;
+}
