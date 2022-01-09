@@ -3,12 +3,13 @@
     transition: 0.1s linear 0.1s;
     cursor: pointer;
     border: none;
-    margin: 0 -40px 0 0;
+    margin: -70px;
+    padding: 0;
     width: 40px;
     height: 40px;
-    justify-self: flex-end;
     align-self: flex-end;
     z-index: 1;
+    position: fixed;
 }
 
 .popup__close-button:hover {
@@ -19,6 +20,6 @@
     .popup__close-button {
         width: 26px;
         height: 26px;
-        margin: 0 -26px 0 0;
+        margin: -55px -15px;
     }
 }

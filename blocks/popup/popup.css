@@ -1,6 +1,6 @@
 .popup {
     position: fixed;
-    bottom: 25%;
+    bottom: 0%;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,6 @@
     visibility: hidden;
     padding: 0;
     background: rgba(0, 0, 0, 0.15);
-    max-width: 100vw;
-    max-height: 100vh;   
+    width: 100%;
+    height: 100%;   
 }

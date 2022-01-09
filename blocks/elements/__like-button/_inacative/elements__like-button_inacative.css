@@ -1,11 +1,7 @@
 .elements__like-button_inacative {
     background: url(../../../../images/icons/like-heart/disabled.svg) center no-repeat;
-    transition: 0.1s linear 0.1s;
-    cursor: pointer;
     border: none;
     width: 21px;
-    height: 19px;
-    align-self: center;
 }
 
 .elements__like-button_inacative:hover {

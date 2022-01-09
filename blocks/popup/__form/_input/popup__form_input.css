@@ -2,9 +2,15 @@
     border: 0;
     border-bottom: 1px solid #000;
     background-color: transparent;
-    max-width: 358px;
+    width: 358px;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 1.2;
+}
+
+@media screen and (max-width:620px) {
+    .popup__form_input {
+        width: 238px;
+    }
 }
