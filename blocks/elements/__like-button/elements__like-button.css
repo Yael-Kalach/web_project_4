@@ -1,8 +1,14 @@
 .elements__like-button {
+    background: url(../../../images/icons/like-heart/disabled.svg) center no-repeat;
     transition: 0.1s linear 0.1s;
-    cursor: pointer;
     border: none;
     width: 21px;
     height: 19px;
     align-self: center;
+    cursor: pointer;
+}
+
+.elements__like-button:hover {
+    background: url(../../../images/icons/like-heart/hover.svg) center no-repeat;
+    transform: scale(1.2);
 }

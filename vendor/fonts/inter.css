@@ -10,10 +10,10 @@
 @font-face {
   font-family: 'Inter';
   font-style:  normal;
-  font-weight: 600;
+  font-weight: 500;
   font-display: swap;
-  src: url("./inter-font/Inter-Web/Inter-SemiBold.woff2") format("woff2"),
-       url("./inter-font/Inter-Web/Inter-SemiBold.woff") format("woff");
+  src: url("./inter-font/Inter-Web/Inter-Medium.woff2") format("woff2"),
+       url("./inter-font/Inter-Web/Inter-Medium.woff") format("woff");
 }
 
 @font-face {

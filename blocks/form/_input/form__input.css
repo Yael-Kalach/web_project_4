@@ -1,6 +1,6 @@
-.popup__form_input {
+.form__input {
     border: 0;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: transparent;
     width: 358px;
     font-size: 14px;
@@ -9,8 +9,13 @@
     line-height: 1.2;
 }
 
+.form__input:nth-child(2) {
+    margin-top: 30px;
+}
+
 @media screen and (max-width:620px) {
-    .popup__form_input {
+    .form__input {
         width: 238px;
+        font-size: 14px;
     }
 }

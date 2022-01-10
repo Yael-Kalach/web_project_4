@@ -7,3 +7,9 @@ color: #545454;
 width: 100%;
 margin: 0;
 }
+
+@media screen and (max-width: 620px) {
+    .footer__copyrights {
+        font-size: 14px;
+    }
+}

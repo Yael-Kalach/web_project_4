@@ -9,78 +9,77 @@
   <body class="page">
       <header class="header">
         <img class="header__logo" src="./images/header-assets/logo.svg" alt="Arount the U.S. Logo">
-        <img class="header__line" src="./images/header-assets/Line.svg" alt="Line">
       </header>
       <main class="content">
-        <div class="profile">
+        <section class="profile">
           <img class="profile__picture" src="./images/photos/Avatar.png" alt="Profile Picture">
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button type="button" class="profile__button_edit"></button>
+            <button type="button" aria-label="edit" class="profile__button_type_edit"></button>
             <p class="profile__about">Explorer</p>
           </div>
-          <button type="button" class="profile__button_add"></button>
-        </div>
+          <button type="button" aria-label="add" class="profile__button_type_add"></button>
+        </section>
         <div class="popup">
           <div class="popup__container">
-            <button type="button" class="popup__close-button"></button>
-            <form class="popup__form">
-              <h2 class="popup__form_title">Edit profile</h2>
-              <fieldset class="popup__form_fieldset">
-                <input type="text" name="name" placeholder="Name" class="popup__form_input_name popup__form_input">
-                <input type="text" name="about" placeholder="About me" class="popup__form_input_about popup__form_input">
-                <button type="submit" class="popup__form_button"></button>
+            <button type="button" aria-label="close" class="popup__close-button"></button>
+            <form name="form" class="popup__form">
+              <h2 class="form__title">Edit profile</h2>
+              <fieldset class="form__fieldset">
+                <input type="text" name="name" placeholder="Name" class="form__input_type_name form__input">
+                <input type="text" name="about" placeholder="About me" class="form__input_type_about form__input">
+                <button type="submit" aria-label="save" class="form__button"></button>
               </fieldset>
             </form>
           </div>
         </div>
-        <div class="elements">
-          <div class="elements__container">
+        <section class="elements">
+          <article class="elements__container">
             <img class="elements__image" alt="Yosemite Valley" src="./images/photos/kirill-pershin-1088404-unsplash.png">
             <div class="elements__title">
               <h2 class="elements__text">Yosemite Valley</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-          <div class="elements__container">
+          </article>
+          <article class="elements__container">
             <img class="elements__image" alt="Lake Louise" src="./images/photos/kirill-pershin-1404681-unsplash.png">
             <div class="elements__title">
               <h2 class="elements__text">Lake Louise</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-          <div class="elements__container">
+          </article>
+          <article class="elements__container">
             <img class="elements__image" alt="Bald Mountains" src="./images/photos/kirill-pershin-1556355-unsplash.png">
             <div class="elements__title">
               <h2 class="elements__text">Bald Mountains</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-          <div class="elements__container">
+          </article>
+          <article class="elements__container">
             <img class="elements__image" alt="Vanoise National Park" src="./images/photos/kirill-pershin-1404681-unsplash-(1).png">
             <div class="elements__title">
               <h2 class="elements__text">Lago di Braies</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-          <div class="elements__container">
+          </article>
+          <article class="elements__container">
             <img class="elements__image" alt="Lago di Braies" src="./images/photos/kirill-pershin-1556355-unsplash-(1).png">
             <div class="elements__title">
               <h2 class="elements__text">Vanoise National Park</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-          <div class="elements__container">
+          </article>
+          <article class="elements__container">
             <img class="elements__image" alt="Yosemite Valley" src="./images/photos/kirill-pershin-1088404-unsplash-(1).png">
             <div class="elements__title">
               <h2 class="elements__text">Yosemite Valley</h2>
-              <button class="elements__like-button elements__like-button_inacative"></button>
+              <button type="button" aria-label="like" class="elements__like-button"></button>
             </div>
-          </div>
-        </div>
+          </article>
+        </section>
       </main>
       <footer class="footer">
         <p class="footer__copyrights">&copy; 2021. Around The U.S.</p>
-        <script src="./script.js"></script>
       </footer>
+      <script src="./script.js"></script> <!--The script doesn't work if I put it in the Head-->
   </body>
