@@ -2,16 +2,9 @@
     width: 24px;
     height: 24px;
     background: url(../../../../images/icons/edit-button/edit.svg) center no-repeat;
-    transition: 0.1s linear 0.1s;
-    border: 2px solid #FFFFFF;
     margin: 0 0 0 18px;
     position: relative;
     grid-area: edit;
-}
-
-.profile__button_type_edit:hover {
-    opacity: 0.6;
-    cursor: pointer;
 }
 
 @media screen and (max-width: 620px) {
