@@ -30,7 +30,7 @@ function closeEditForm() {
 }
 
 openEditFormButton.addEventListener('click', openEditForm);
-editCloseButton.addEventListener('click', closeEditForm); 
+editCloseButton.addEventListener('click', closeEditForm);
 
 // Edit form
 
@@ -41,27 +41,7 @@ function handleFormSubmit(event) {
   closeEditForm()
 }
 
-editForm.addEventListener('submit', handleFormSubmit); 
-
-// add
-const elementsTitle = document.querySelector('.elements__text');
-const elementsImage = document.querySelector('.elements__image');
-// add input
-const inputTitle = document.querySelector('.form__input_type_title');
-const inputImage = document.querySelector('.form__input_type_image');
-
-// add popup
-
-function openAddForm() {
-  addPopup.classList.add('popup_visible');
-}
-
-function closeAddForm() {
-  addPopup.classList.remove('popup_visible');
-}
-
-openAddFormButton.addEventListener('click', openAddForm);
-addCloseButton.addEventListener('click', closeAddForm); 
+editForm.addEventListener('submit', handleFormSubmit);
 
 // Elements
 
@@ -81,6 +61,57 @@ function addElement(imageValue, textValue) {
   });
   elementsContainer.append(cardElement);
 }
+
+// default cards
+
+const initialCards = [
+  {
+    name: "Yosemite Valley",
+    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+  },
+  {
+    name: "Lake Louise",
+    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+  },
+  {
+    name: "Latemar",
+    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+  }
+];
+
+elementsContainer.append(initialCards)
+
+// add
+const elementsTitle = document.querySelector('.elements__text');
+const elementsImage = document.querySelector('.elements__image');
+// add input
+const inputTitle = document.querySelector('.form__input_type_title');
+const inputImage = document.querySelector('.form__input_type_image');
+
+// add popup
+
+function openAddForm() {
+  addPopup.classList.add('popup_visible');
+}
+
+function closeAddForm() {
+  addPopup.classList.remove('popup_visible');
+}
+
+openAddFormButton.addEventListener('click', openAddForm);
+addCloseButton.addEventListener('click', closeAddForm);
 
 // add form
 
