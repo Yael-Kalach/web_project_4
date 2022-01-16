@@ -1,0 +1,9 @@
+.elements__button_like {
+    background: url(../../../../images/icons/like-heart/disabled.svg) center no-repeat;
+    width: 21px;
+    height: 19px;
+}
+
+.elements__button_like:hover {
+    background: url(../../../../images/icons/like-heart/hover.svg) center no-repeat;
+}
