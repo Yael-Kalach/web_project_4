@@ -50,7 +50,7 @@ function addElement(imageValue, textValue) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.elements__card').cloneNode(true);
   // contents
-  cardElement.querySelector('.elements__image').textContent = imageValue;
+  cardElement.querySelector('.elements__image').style.backgroundImage = imageValue;
   cardElement.querySelector('.elements__text').textContent = textValue;
   // trash button
   cardElement.querySelector('.elements__button_trash').addEventListener("click", function (evt) {
@@ -59,7 +59,7 @@ function addElement(imageValue, textValue) {
   cardElement.querySelector('.elements__button_like').addEventListener("click", function (evt) {
     evt.target.classList.toggle('elements__button_like_active');
   });
-  elementsContainer.append(cardElement);
+  elementsContainer.preppend(cardElement);
 }
 
 // default cards
@@ -118,7 +118,7 @@ addCloseButton.addEventListener('click', closeAddForm);
 function handleCardSubmit(event) {
   event.preventDefault();
   elementsTitle.textContent = inputTitle.value;
-  elementsImage.textContent = inputImage.value;
+  elementsImage.style.backgroundImage = `url(${inputImage.value})`;
   closeAddForm()
   addElement()
 }
