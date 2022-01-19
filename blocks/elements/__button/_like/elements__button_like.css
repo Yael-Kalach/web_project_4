@@ -5,5 +5,5 @@
 }
 
 .elements__button_like:hover {
-    background: url(../../../../images/icons/like-heart/hover.svg) center no-repeat;
+    opacity: 0.6;
 }
