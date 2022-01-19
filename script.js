@@ -45,32 +45,39 @@ editForm.addEventListener('submit', handleFormSubmit);
 // Elements
 
 // template
-const cardTemplate = document.querySelector('#card-template').cloneNode(true).content.querySelector('.elements__card');
+//const cardTemplate = document.querySelector('#card-template').cloneNode(true).content.querySelector('.elements__card');
 
-const addCard = (props) => {
-  // props
-  const localName = props.name;
-  const localLink = props.link;
-  const localCardTemplate = props.Template;
-  // contents
-  const cardElement = localCardTemplate;
-  const cardImage = cardElement.querySelector('.elements__image');
-  cardImage.style.backgroundImage = 'url(' + localLink + ')';
-  const cardTitle = cardElement.querySelector('.elements__text');
-  cardTitle.textContent = localName;
-  // like button
-  const cardLikeButton = cardElement.querySelector('.elements__button_like');
-  cardLikeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('elements__button_like_active');
-  });
-  // trash button
-  const cardTrashButton = cardElement.querySelector('.elements__button_trash');
-  cardTrashButton.addEventListener('click', function () {
-    const card = document.querySelector('.elements__card')
-    card.forEach((item) => {
-      item.remove();
-    });});
+const addCard = (card) => {
+  const cardTemplate = document.querySelector('#card-template').content;
+  const cardElement = cardTemplate.querySelector('.elements__card').cloneNode(true);
+
+  cardImage = cardElement.querySelector('.elements__image');
+  cardTitle = cardElement.querySelector('.elements__text');
+ 
+  cardImage.style.backgroundImage = 'url(' + card.link + ')';
+  cardTitle.textContent = card.name;
+
   return cardElement
+}
+
+//const addCard = (card) => {
+  // props
+  //const localName = card.name;
+  //const localLink = card.link;
+  //const localCardTemplate = card.Template;
+  // contents
+  //const cardElement = localCardTemplate;
+  //const cardImage = cardElement.querySelector('.elements__image');
+  //const cardTitle = cardElement.querySelector('.elements__text');
+
+  //cardImage.style.backgroundImage = 'url(' + localLink + ')';
+  //cardTitle.textContent = localName;
+  //return cardElement
+//}
+
+function renderCard (card) { 
+  const cardList = document.querySelector('.elements');
+  cardList.prepend(addCard(card)); 
 }
 
 // default cards
@@ -103,16 +110,13 @@ const initialCards = [
 ];
 
 const cardPopulation = () => {
-  const cardTemplate = document.querySelector('#card-template').cloneNode(true).content.querySelector('.elements__card');
   const cardList = document.querySelector('.elements');
   initialCards.forEach((item) => {
     const cardPropsObject = {
       name: item.name, 
       link: item.link,
-      Template: cardTemplate
     };
     cardList.append(addCard(cardPropsObject));
-    debugger;
   });
 };
 cardPopulation();
@@ -144,10 +148,22 @@ function handleCardSubmit(evt) {
   elementsTitle.textContent = inputTitle.value;
   elementsImage.style.backgroundImage = `url(${inputImage.value})`;
   closeAddForm()
-  addCard(props)
+  addCard()
   
   inputTitle.value = "";
   inputImage.value = "";
 }
 
 addForm.addEventListener('submit', handleCardSubmit);
+
+// like button
+const cardLikeButton = document.querySelector('.elements__button_like');
+
+cardLikeButton.addEventListener('click', function (evt) {
+  evt.target.classList.toggle('elements__button_like_active');
+});
+// trash button
+const cardTrashButton = document.querySelector('.elements__button_trash');
+cardTrashButton.addEventListener('click', function (evt) {
+  evt.target.closest('.elements__card').remove();
+  });
