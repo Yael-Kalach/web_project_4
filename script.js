@@ -147,11 +147,12 @@ function handleCardSubmit(evt) {
 
   elementsTitle.textContent = inputTitle.value;
   elementsImage.style.backgroundImage = `url(${inputImage.value})`;
-  closeAddForm()
-  addCard()
+  addCard(inputTitle.value, inputImage.value)
   
   inputTitle.value = "";
   inputImage.value = "";
+
+  closeAddForm()
 }
 
 addForm.addEventListener('submit', handleCardSubmit);
