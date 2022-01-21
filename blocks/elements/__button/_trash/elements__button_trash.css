@@ -1,10 +1,11 @@
 .elements__button_trash{
     background: url(../../../../images/icons/trash-button/trash.svg) center no-repeat;
+    position: relative;
     width: 18px;
     height: 19.3px;
-    position: relative;
-    margin: 18px 0 0 0;
+    margin-left: 235px;
     z-index: 1;
+    right: 0
 }
 
 .elements__button_trash:hover {

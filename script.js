@@ -1,11 +1,14 @@
 const openEditFormButton = document.querySelector('.profile__button_type_edit');
 const openAddFormButton = document.querySelector('.profile__button_type_add');
+const image = document.querySelector('.elements__image');
 const popup = document.querySelector('.popup');
 const editPopup = document.querySelector('.edit-popup');
 const addPopup = document.querySelector('.add-popup');
+const imagePopup = document.querySelector('.image-popup');
 const closeButton = popup.querySelector('.popup__close-button');
 const editCloseButton = editPopup.querySelector('.edit-popup__close-button');
 const addCloseButton = addPopup.querySelector('.add-popup__close-button');
+const imageCloseButton = imagePopup.querySelector('.image-popup__close-button');
 const editForm = document.querySelector('.form__edit');
 const addForm = document.querySelector('.form__add');
 
@@ -54,7 +57,7 @@ const addCard = (card) => {
   cardImage = cardElement.querySelector('.elements__image');
   cardTitle = cardElement.querySelector('.elements__text');
  
-  cardImage.style.backgroundImage = 'url(' + card.link + ')';
+  cardImage.style.background = 'url(' + card.link + ') center no-repeat';
   cardTitle.textContent = card.name;
 
   return cardElement
@@ -146,9 +149,10 @@ function handleCardSubmit(evt) {
   const inputImage = document.querySelector('.form__input_type_image');
 
   elementsTitle.textContent = inputTitle.value;
-  elementsImage.style.backgroundImage = `url(${inputImage.value})`;
+  elementsImage.style.background = `url(${inputImage.value})`;
+
   addCard(inputTitle.value, inputImage.value)
-  
+
   inputTitle.value = "";
   inputImage.value = "";
 
@@ -168,3 +172,16 @@ const cardTrashButton = document.querySelector('.elements__button_trash');
 cardTrashButton.addEventListener('click', function (evt) {
   evt.target.closest('.elements__card').remove();
   });
+
+// image popup
+
+function openImagePopup() {
+  imagePopup.classList.add('popup_visible');
+  }
+
+image.addEventListener('click', function () {
+  const popupImageContainer = document.querySelector('.image-popup_container')
+  openImagePopup()
+
+  popupImageContainer.style.background = image.style.background
+});
