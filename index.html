@@ -47,7 +47,11 @@
           </div>
         </div>
         <div class="popup image-popup">
-
+          <div class="image-popup__container">        
+            <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
+            <div class="image-popup__image"></div>
+            <p class="image-popup__caption"></p>
+          </div>
         </div>
         <section class="elements">
           
@@ -67,14 +71,6 @@
             <button type="button" aria-label="like" class="elements__button elements__button_like"></button>
           </div>
         </article>
-      </template>
-
-      <template id="image-popup-template">
-        <div class="image-popup__container">        
-          <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
-          <img class="image-popup__image">
-          <p class="image-popup__caption"></p>
-        </div>
       </template>
 
       <script src="./script.js"></script> <!--The script doesn't work if I put it in the Head-->

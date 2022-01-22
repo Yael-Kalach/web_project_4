@@ -163,35 +163,21 @@ cardTrashButton.forEach(trash => {
 const imagePopup = document.querySelector('.image-popup');
 const image = document.querySelectorAll('.elements__image');
 const imageCloseButton = imagePopup.querySelector('.image-popup__close-button');
+const fullSizeImage = imagePopup.querySelector('.image-popup__image');
+const imageCaption = imagePopup.querySelector('.image-popup__caption');
 
-const elementImagePopup = (img) => {
-  const imgTemplate = document.querySelector('#image-popup-template').content;
-  const imgElement = imgTemplate.querySelector('.image-popup__container').cloneNode(true);
+image.forEach(img => {
+  img.addEventListener('click', () => {
+    imagePopup.classList.add('popup_visible');
+    const getImageStyle = img.style.background;
+    const getImageCaption = img.textContent;
 
-  popupImage = imgElement.querySelector('.image-popup__image');
-  popupTitle = imgElement.querySelector('.image-popup__caption');
-
-  popupImage.src = img.link;
-  popupTitle.textContent = img.name;
-
-  return imgElement
-}
-
-function renderelementImagePopup(img){
-  imagePopup.prepend(elementImagePopup(img)); 
-}
-
-function openImagePopup() {
-  imagePopup.classList.add('popup_visible');
-}
-
+    fullSizeImage.style.background = getImageStyle;
+    imageCaption.textContent = getImageCaption;
+  });
+})
 function closeImagePopup() {
   imagePopup.classList.remove('popup_visible');
 }
 
-image.forEach(img => {
-  img.addEventListener('click', (evt) => {
-    openImagePopup();
-    renderelementImagePopup()
-  });
-})
+imageCloseButton.addEventListener('click', closeImagePopup)
