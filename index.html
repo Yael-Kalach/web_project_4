@@ -33,11 +33,6 @@
             </form>
           </div>
         </div>
-        <div class="popup image-popup">
-          <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
-          <div class="image-popup_container">
-          </div>
-        </div>
         <div class="popup add-popup">
           <div class="popup__container add-popup_container">
             <button type="button" aria-label="close" class="popup__close-button add-popup__close-button"></button>
@@ -51,6 +46,9 @@
             </form>
           </div>
         </div>
+        <div class="popup image-popup">
+
+        </div>
         <section class="elements">
           
         </section>
@@ -61,14 +59,22 @@
 
       <template id="card-template">
         <article class="elements__card">
+          <button type="button" aria-label="trash" class="elements__button elements__button_trash"></button>
           <div class="elements__image">
-            <button type="button" aria-label="trash" class="elements__button elements__button_trash"></button>
           </div>
           <div class="elements__title">
             <h2 class="elements__text"></h2>
             <button type="button" aria-label="like" class="elements__button elements__button_like"></button>
           </div>
         </article>
+      </template>
+
+      <template id="image-popup-template">
+        <div class="image-popup__container">        
+          <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
+          <img class="image-popup__image">
+          <p class="image-popup__caption"></p>
+        </div>
       </template>
 
       <script src="./script.js"></script> <!--The script doesn't work if I put it in the Head-->

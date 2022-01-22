@@ -1,14 +1,11 @@
 const openEditFormButton = document.querySelector('.profile__button_type_edit');
 const openAddFormButton = document.querySelector('.profile__button_type_add');
-const image = document.querySelector('.elements__image');
 const popup = document.querySelector('.popup');
 const editPopup = document.querySelector('.edit-popup');
 const addPopup = document.querySelector('.add-popup');
-const imagePopup = document.querySelector('.image-popup');
 const closeButton = popup.querySelector('.popup__close-button');
 const editCloseButton = editPopup.querySelector('.edit-popup__close-button');
 const addCloseButton = addPopup.querySelector('.add-popup__close-button');
-const imageCloseButton = imagePopup.querySelector('.image-popup__close-button');
 const editForm = document.querySelector('.form__edit');
 const addForm = document.querySelector('.form__add');
 
@@ -48,7 +45,6 @@ editForm.addEventListener('submit', handleFormSubmit);
 // Elements
 
 // template
-//const cardTemplate = document.querySelector('#card-template').cloneNode(true).content.querySelector('.elements__card');
 
 const addCard = (card) => {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -62,21 +58,6 @@ const addCard = (card) => {
 
   return cardElement
 }
-
-//const addCard = (card) => {
-  // props
-  //const localName = card.name;
-  //const localLink = card.link;
-  //const localCardTemplate = card.Template;
-  // contents
-  //const cardElement = localCardTemplate;
-  //const cardImage = cardElement.querySelector('.elements__image');
-  //const cardTitle = cardElement.querySelector('.elements__text');
-
-  //cardImage.style.backgroundImage = 'url(' + localLink + ')';
-  //cardTitle.textContent = localName;
-  //return cardElement
-//}
 
 function renderCard (card) { 
   const cardList = document.querySelector('.elements');
@@ -148,10 +129,7 @@ function handleCardSubmit(evt) {
   const inputTitle = document.querySelector('.form__input_type_title');
   const inputImage = document.querySelector('.form__input_type_image');
 
-  elementsTitle.textContent = inputTitle.value;
-  elementsImage.style.background = `url(${inputImage.value})`;
-
-  addCard(inputTitle.value, inputImage.value)
+  renderCard({name: inputTitle.value, link: inputImage.value})
 
   inputTitle.value = "";
   inputImage.value = "";
@@ -162,26 +140,58 @@ function handleCardSubmit(evt) {
 addForm.addEventListener('submit', handleCardSubmit);
 
 // like button
-const cardLikeButton = document.querySelector('.elements__button_like');
+const cardLikeButton = document.querySelectorAll('.elements__button_like');
 
-cardLikeButton.addEventListener('click', function (evt) {
-  evt.target.classList.toggle('elements__button_like_active');
-});
-// trash button
-const cardTrashButton = document.querySelector('.elements__button_trash');
-cardTrashButton.addEventListener('click', function (evt) {
-  evt.target.closest('.elements__card').remove();
+cardLikeButton.forEach(like => {
+  like.addEventListener('click', (evt) =>{
+    evt.target.classList.toggle('elements__button_like_active');
   });
+})
+
+
+// trash button
+const cardTrashButton = document.querySelectorAll('.elements__button_trash');
+
+cardTrashButton.forEach(trash => {
+  trash.addEventListener('click', (evt) =>{
+     evt.target.closest('.elements__card').remove();
+  });
+});
 
 // image popup
 
+const imagePopup = document.querySelector('.image-popup');
+const image = document.querySelectorAll('.elements__image');
+const imageCloseButton = imagePopup.querySelector('.image-popup__close-button');
+
+const elementImagePopup = (img) => {
+  const imgTemplate = document.querySelector('#image-popup-template').content;
+  const imgElement = imgTemplate.querySelector('.image-popup__container').cloneNode(true);
+
+  popupImage = imgElement.querySelector('.image-popup__image');
+  popupTitle = imgElement.querySelector('.image-popup__caption');
+
+  popupImage.src = img.link;
+  popupTitle.textContent = img.name;
+
+  return imgElement
+}
+
+function renderelementImagePopup(img){
+  imagePopup.prepend(elementImagePopup(img)); 
+}
+
 function openImagePopup() {
   imagePopup.classList.add('popup_visible');
-  }
+}
 
-image.addEventListener('click', function () {
-  const popupImageContainer = document.querySelector('.image-popup_container')
-  openImagePopup()
+function closeImagePopup() {
+  imagePopup.classList.remove('popup_visible');
+}
 
-  popupImageContainer.style.background = image.style.background
-});
+image.forEach(img => {
+  img.addEventListener('click', (evt) => {
+    openImagePopup();
+    renderelementImagePopup()
+  });
+})
