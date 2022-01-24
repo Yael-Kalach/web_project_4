@@ -91,7 +91,7 @@ const addCard = (card) => {
   fullSizeImage.src = evt.target.src;
   fullSizeImage.alt = evt.target.alt;
   imageCaption.textContent = evt.target.alt;
-  imagePopup.classList.add('popup_visible');
+  openPopup(imagePopup)
  })
 
   return cardElement
@@ -143,7 +143,7 @@ populateCard();
 
 // add popup
 
-openAddFormButton.addEventListener('click', openPopup(addPopup));
+openAddFormButton.addEventListener('click',() => {openPopup(addPopup)});
 addCloseButton.addEventListener('click', closePopup);
 
 // add form
