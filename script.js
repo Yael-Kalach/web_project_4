@@ -80,7 +80,7 @@ const addCard = (card) => {
 
 function renderPopup(){
  fullSizeImage.src = cardImage.src;
- imageCaption.textContent = cardTitle.textContent;
+ imageCaption.textContent = cardImage.alt;
 }
 
 function openImagePopup() {
