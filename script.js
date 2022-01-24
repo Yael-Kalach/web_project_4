@@ -33,11 +33,9 @@ function openPopup(popup) {
   popup.classList.add('popup_visible');
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_visible');
+function closePopup(e) {
+  e.target.closest('.popup').classList.remove('popup_visible');
 }
-
-closeButtonMaster.addEventListener('click,', closePopup(popupMaster))
 
 // Profile popup
 openEditFormButton.addEventListener('click', () => {
@@ -52,10 +50,11 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  closePopup(editPopup)
+  closePopup(event)
 }
 
 editForm.addEventListener('submit', handleProfileFormSubmit);
+editCloseButton.addEventListener('click', closePopup);
 
 // Elements
 
@@ -144,28 +143,22 @@ populateCard();
 
 // add popup
 
-function openAddForm() {
-  addPopup.classList.add('popup_visible');
-}
-
-function closeAddForm() {
-  addPopup.classList.remove('popup_visible');
-}
-
-openAddFormButton.addEventListener('click', openAddForm);
-addCloseButton.addEventListener('click', closeAddForm);
+openAddFormButton.addEventListener('click', openPopup(addPopup));
+addCloseButton.addEventListener('click', closePopup);
 
 // add form
 
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
+function handleAddCardSubmit(event) {
+  event.preventDefault();
 
   renderCard({name: inputTitle.value, link: inputImage.value})
 
   inputTitle.value = "";
   inputImage.value = "";
 
-  closeAddForm()
+  closePopup(event)
 }
 
 addForm.addEventListener('submit', handleAddCardSubmit);
+
+imageCloseButton.addEventListener('click', closePopup);
