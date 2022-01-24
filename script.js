@@ -76,27 +76,19 @@ const addCard = (card) => {
    evt.target.closest('.elements__card').remove();
  });
 
-// image popup
+ //image
 
-function renderPopup(){
- fullSizeImage.src = cardImage.src;
- imageCaption.textContent = cardImage.alt;
-}
-
-function openImagePopup() {
-  renderPopup()
+ cardImage.addEventListener('click', function (evt) {
+  fullSizeImage.src = evt.target.src;
+  imageCaption.textContent = evt.target.alt;
   imagePopup.classList.add('popup_visible');
-}
+ })
 
-function closeImagePopup() {
+ function closeImagePopup() {
   imagePopup.classList.remove('popup_visible');
-}
+ }
 
-imageCloseButton.addEventListener('click', closeImagePopup)
-
-  //image
-
-  cardImage.addEventListener('click', openImagePopup)
+  imageCloseButton.addEventListener('click', closeImagePopup)
 
   return cardElement
 }
