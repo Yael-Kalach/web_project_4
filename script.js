@@ -33,8 +33,12 @@ function openPopup(popup) {
   popup.classList.add('popup_visible');
 }
 
-function closePopup(e) {
-  e.target.closest('.popup').classList.remove('popup_visible');
+function closePopup(popup) {
+  popup.classList.remove('popup_visible');
+}
+
+function handleClosePopup(event) {
+  closePopup(event.target.closest('.popup'))
 }
 
 // Profile popup
