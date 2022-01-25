@@ -54,11 +54,11 @@ function handleProfileFormSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
-  closePopup(event)
+  handleClosePopup(event)
 }
 
 editForm.addEventListener('submit', handleProfileFormSubmit);
-editCloseButton.addEventListener('click', closePopup);
+editCloseButton.addEventListener('click', handleClosePopup);
 
 // Elements
 
@@ -148,7 +148,7 @@ populateCard();
 // add popup
 
 openAddFormButton.addEventListener('click',() => {openPopup(addPopup)});
-addCloseButton.addEventListener('click', closePopup);
+addCloseButton.addEventListener('click', handleClosePopup);
 
 // add form
 
@@ -160,9 +160,9 @@ function handleAddCardSubmit(event) {
   inputTitle.value = "";
   inputImage.value = "";
 
-  closePopup(event)
+  handleClosePopup(event)
 }
 
 addForm.addEventListener('submit', handleAddCardSubmit);
 
-imageCloseButton.addEventListener('click', closePopup);
+imageCloseButton.addEventListener('click', handleClosePopup);
