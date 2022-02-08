@@ -3,6 +3,11 @@ const popupMaster = document.querySelector('.popup');
 const editPopup = document.querySelector('.edit-popup');
 const addPopup = document.querySelector('.add-popup');
 const imagePopup = document.querySelector('.image-popup');
+// overlay
+const popupOverlay = popupMaster.querySelector('.popup__overlay');
+const editOverlay = editPopup.querySelector('.edit-popup__overlay');
+const addOverlay = addPopup.querySelector('.add-popup__overlay');
+const imageOverlay = imagePopup.querySelector('.image-popup__overlay');
 // buttons
 const openEditFormButton = document.querySelector('.profile__button_type_edit');
 const openAddFormButton = document.querySelector('.profile__button_type_add');
@@ -41,6 +46,12 @@ function handleClosePopup(event) {
   closePopup(event.target.closest('.popup'))
 }
 
+function ESCclose(key) {
+  if (key.keyCode == "27"){ 
+    handleClosePopup()}
+ }
+ editPopup.addEventListener("keydown", ESCclose)
+
 // Profile popup
 openEditFormButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -59,7 +70,7 @@ function handleProfileFormSubmit(event) {
 
 editForm.addEventListener('submit', handleProfileFormSubmit);
 editCloseButton.addEventListener('click', handleClosePopup);
-
+editOverlay.addEventListener('click', handleClosePopup);
 // Elements
 
 const addCard = (card) => {
@@ -149,6 +160,7 @@ populateCard();
 
 openAddFormButton.addEventListener('click',() => {openPopup(addPopup)});
 addCloseButton.addEventListener('click', handleClosePopup);
+addOverlay.addEventListener('click', handleClosePopup);
 
 // add form
 
@@ -166,3 +178,4 @@ function handleAddCardSubmit(event) {
 addForm.addEventListener('submit', handleAddCardSubmit);
 
 imageCloseButton.addEventListener('click', handleClosePopup);
+imageOverlay.addEventListener('click', handleClosePopup);
