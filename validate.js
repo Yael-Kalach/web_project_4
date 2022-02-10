@@ -44,14 +44,12 @@ const enableValidation = (settings) =>{
             form.addEventListener("submit", (e)=>e.preventDefault());
             const input = [...form.querySelectorAll(inputSelector)];
             const submitButton = form.querySelector(submitButtonSelector)
-            const errorMessage = form.querySelector(errorClass)
             input.forEach((input)=>{
                 console.log(input);
                 input.addEventListener('input', () => {
                    const isValid = checkValidity(input);
                    if (isValid){
                        hideError({input: input, inputErrorClass: inputErrorClass});
-                       errorMessage.classList.remove(errorClass)
                        toggleButton({
                         submitButton: submitButton,
                         inactiveButtonClass: inactiveButtonClass,
@@ -60,7 +58,6 @@ const enableValidation = (settings) =>{
                    }
                    else{
                        showError({input: input, inputErrorClass: inputErrorClass});
-                       errorMessage.classList.add(errorClass)
                        toggleButton({
                         submitButton,
                         inactiveButtonClass,
