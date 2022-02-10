@@ -36,21 +36,24 @@ const inputImage = document.querySelector('.form__input_type_image');
 // Popup functions
 function openPopup(popup) {
   popup.classList.add('popup_visible');
+  document.addEventListener("keydown", escClose);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_visible');
+  document.addEventListener("keydown", escClose);
 }
 
 function handleClosePopup(event) {
-  closePopup(event.target.closest('.popup'))
+  closePopup(event.target.closest('.popup'));
 }
 
-function ESCclose(key) {
-  if (key.keyCode == "27"){ 
-    handleClosePopup()}
+function escClose(event) {
+  if (event.key == "Escape"){ 
+  const visiblePopup = document.querySelector('.popup_visible');
+  visiblePopup.classList.remove('popup_visible');
+  }
  }
- editPopup.addEventListener("keydown", ESCclose)
 
 // Profile popup
 openEditFormButton.addEventListener('click', () => {

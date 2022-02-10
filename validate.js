@@ -1,13 +1,18 @@
-const errorMessage = document.querySelector(".form__error");
-
 const hideError = (props) =>{
     const {inputErrorClass, input} = props
+    const errorElement = document.querySelector(`#${input.id}-error`);
     input.classList.remove(inputErrorClass);
+    errorElement.classList.remove("form__error_visible");
+    errorElement.textContent = ''
 }
 
 const showError = (props) =>{
     const {inputErrorClass, input} = props
+    const errorElement = document.querySelector(`#${input.id}-error`)
+    const error = input.validationMessage
     input.classList.add(inputErrorClass);
+    errorElement.textContent = error
+    errorElement.classList.add("form__error_visible")
 }
 
 const checkValidity = (input) =>{

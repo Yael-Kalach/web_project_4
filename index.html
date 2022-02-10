@@ -27,10 +27,10 @@
             <form name="form" class="form edit-form">
               <h2 class="form__title">Edit profile</h2>
               <fieldset class="form__fieldset">
-                <input type="text" name="name" placeholder="Name" class="form__input_type_name form__input" required minlength="2" maxlength="40">
-                <p class="form__error">Please fill out this field.</p>
-                <input type="text" name="about" placeholder="About me" class="form__input_type_about form__input" required minlength="2" maxlength="200">
-                <p class="form__error">Please fill out this field.</p>
+                <input id="name-input" type="text" name="name" placeholder="Name" class="form__input_type_name form__input" required minlength="2" maxlength="40">
+                <span id="name-input-error" class="form__error"></span>
+                <input id="description-input" type="text" name="about" placeholder="About me" class="form__input_type_about form__input" required minlength="2" maxlength="200">
+                <span id="description-input-error" class="form__error"></span>
                 <button type="submit" aria-label="save" class="form__button">Save</button>
               </fieldset>
             </form>
@@ -43,10 +43,10 @@
             <form name="form_add" class="form add-form">
               <h2 class="form__title">New place</h2>
               <fieldset class="form__fieldset">
-                <input type="text" name="title" placeholder="Title" class="form__input_type_title form__input" required minlength="1" maxlength="30">
-                <p class="form__error">Please fill out this field.</p>
-                <input type="url" name="image" placeholder="Image link" class="form__input_type_image form__input" required>
-                <p class="form__error">Please enter a web address.</p>
+                <input id="title-input" type="text" name="title" placeholder="Title" class="form__input_type_title form__input" required minlength="1" maxlength="30">
+                <span id="title-input-error" class="form__error"></span>
+                <input id="image-input" type="url" name="image" placeholder="Image link" class="form__input_type_image form__input" required>
+                <span id="image-input-error" class="form__error"></span>
                 <button type="submit" aria-label="create" class="form__button">Create</button>
               </fieldset>
             </form>
