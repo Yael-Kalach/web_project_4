@@ -59,6 +59,7 @@ function handleCloseByEscape(event) {
 openEditFormButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
+  checkInitialFormValidity(editPopup.querySelector('form'), pagesettings)
   openPopup(editPopup);
 });
 
@@ -163,7 +164,7 @@ populateCard();
 
 openAddFormButton.addEventListener('click',() => {
   openPopup(addPopup)
-  // import {toggleButton} from './validate'
+  checkInitialFormValidity(addPopup.querySelector('form'), pagesettings)
 });
 addCloseButton.addEventListener('click', handleCloseByClick);
 addOverlay.addEventListener('click', handleCloseByClick);
@@ -184,4 +185,4 @@ function handleAddCardSubmit(event) {
 addForm.addEventListener('submit', handleAddCardSubmit);
 
 imageCloseButton.addEventListener('click', handleCloseByClick);
-imageOverlay.addEventListener('click', handleCloseByClick);
+imageOverlay.addEventListener('mousedown', handleCloseByClick);

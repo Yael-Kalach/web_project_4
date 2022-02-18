@@ -1,3 +1,12 @@
+const pagesettings = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_disabled",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__error_visible"
+}
+
 function hideInputError(formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
 
@@ -18,15 +27,16 @@ function checkInputValidity(formElement, inputElement, settings) {
   if(inputElement.validity.valid) {
     hideInputError(formElement, inputElement, settings)
   }
-  else{
-    showInputError(formElement, inputElement, settings)
-  }
-}
+    else {
+      showInputError(formElement, inputElement, settings)
+    };
+};
 
 const toggleButtonState = (inputElements, submitButtonElement, settings) => {
   const hasInvalidInput = inputElements.some(inputElement => !inputElement.validity.valid)
   if (hasInvalidInput) {
     submitButtonElement.classList.add(settings.inactiveButtonClass);
+    submitButtonElement.disabled = true;
   } else {
     submitButtonElement.classList.remove(settings.inactiveButtonClass);
   }
@@ -53,17 +63,16 @@ function enableValidation(settings) {
   forms.forEach(formElement => {
     formElement.addEventListener("submit", function (e) {
       e.preventDefault();
-  })
-  setEventListeners(formElement, settings)
-});
+    })
+      setEventListeners(formElement, settings)
+  });
 };
 
+function checkInitialFormValidity(formElement, settings) {
+  const inputElements = [...formElement.querySelectorAll(settings.inputSelector)];
+  const submitButtonElement = formElement.querySelector(settings.submitButtonSelector);
 
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: "form__button_disabled",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__error_visible"
-});
+  toggleButtonState(inputElements, submitButtonElement, settings);
+}
+
+enableValidation(pagesettings);
