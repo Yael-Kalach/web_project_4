@@ -1,4 +1,4 @@
-const pagesettings = {
+const validationSettings = {
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__button",
@@ -76,4 +76,4 @@ function checkInitialFormValidity(formElement, settings) {
   toggleButtonState(inputElements, submitButtonElement, settings);
 }
 
-enableValidation(pagesettings);
+enableValidation(validationSettings);
