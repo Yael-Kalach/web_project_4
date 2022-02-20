@@ -39,6 +39,7 @@ const toggleButtonState = (inputElements, submitButtonElement, settings) => {
     submitButtonElement.disabled = true;
   } else {
     submitButtonElement.classList.remove(settings.inactiveButtonClass);
+    submitButtonElement.disabled = false;
   }
 };
 
