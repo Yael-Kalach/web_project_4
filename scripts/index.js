@@ -17,8 +17,8 @@ const editCloseButton = editPopup.querySelector('.edit-popup__close-button');
 const addCloseButton = addPopup.querySelector('.add-popup__close-button');
 const imageCloseButton = imagePopup.querySelector('.image-popup__close-button');
 // forms
-const editForm = document.querySelector('.edit-form');
-const addForm = document.querySelector('.add-form');
+const editForm = document.querySelector(".edit-form")
+const addCardForm = document.querySelector(".add-form")
 // Profile
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
@@ -32,12 +32,29 @@ const cardList = document.querySelector('.elements');
 // add form
 const inputTitle = document.querySelector('.form__input_type_title');
 const inputImage = document.querySelector('.form__input_type_image');
+// Imports
+  //Form validator
+  import FormValidator from "./FormValidator.js"
+
+  const settings = {
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible"
+  }
+
+  const editFormValidator = new FormValidator(settings, editForm)
+  const addCardFormValidator = new FormValidator(settings, addCardForm)
+
+  editFormValidator.enableValidation()
+  addCardFormValidator.enableValidation()
+    //utils
+    import {openPopup} from "./utils.js"
+    //Card
+    import {Card} from "./Card.js"
 
 // Popup functions
-function openPopup(popup) {
-  popup.classList.add('popup_visible');
-  document.addEventListener("keydown", handleCloseByEscape);
-}
 
 function closePopup(popup) {
   popup.classList.remove('popup_visible');
@@ -59,7 +76,7 @@ function handleCloseByEscape(event) {
 openEditFormButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
-  checkInitialFormValidity(editPopup.querySelector('form'), validationSettings)
+  editFormValidator.checkInitialFormValidity()
   openPopup(editPopup);
 });
 
@@ -77,47 +94,50 @@ editCloseButton.addEventListener('click', handleCloseByClick);
 editOverlay.addEventListener('click', handleCloseByClick);
 // Elements
 
-const addCard = (card) => {
-  // template
-  const cardTemplate = document.querySelector('#card-template').content;
-  const cardElement = cardTemplate.querySelector('.elements__card').cloneNode(true);
-  // buttons
-  const cardLikeButton = cardElement.querySelector('.elements__button_like');
-  const cardTrashButton = cardElement.querySelector('.elements__button_trash');
-  // content
-  const cardImage = cardElement.querySelector('.elements__image');
-  const cardTitle = cardElement.querySelector('.elements__text');
+// const addCard = (card) => {
+//   // template
+//   const cardTemplate = document.querySelector('#card-template').content;
+//   const cardElement = cardTemplate.querySelector('.elements__card').cloneNode(true);
+//   // buttons
+//   const cardLikeButton = cardElement.querySelector('.elements__button_like');
+//   const cardTrashButton = cardElement.querySelector('.elements__button_trash');
+//   // content
+//   const cardImage = cardElement.querySelector('.elements__image');
+//   const cardTitle = cardElement.querySelector('.elements__text');
 
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardTitle.textContent = card.name;
+//   cardImage.src = card.link;
+//   cardImage.alt = card.name;
+//   cardTitle.textContent = card.name;
 
-  // like button
+//   // like button
 
- cardLikeButton.addEventListener("click", (e) => {
-  e.target.classList.toggle("elements__button_like_active");
-});
+//  cardLikeButton.addEventListener("click", (e) => {
+//   e.target.classList.toggle("elements__button_like_active");
+// });
 
-  // trash button
+//   // trash button
 
- cardTrashButton.addEventListener('click', function (evt) {
-   evt.target.closest('.elements__card').remove();
- });
+//  cardTrashButton.addEventListener('click', function (evt) {
+//    evt.target.closest('.elements__card').remove();
+//  });
 
- //image
+//  //image
 
- cardImage.addEventListener('click', function (evt) {
-  fullSizeImage.src = evt.target.src;
-  fullSizeImage.alt = evt.target.alt;
-  imageCaption.textContent = evt.target.alt;
-  openPopup(imagePopup)
- })
+//  cardImage.addEventListener('click', function (evt) {
+//   fullSizeImage.src = evt.target.src;
+//   fullSizeImage.alt = evt.target.alt;
+//   imageCaption.textContent = evt.target.alt;
+//   openPopup(imagePopup)
+//  })
 
-  return cardElement
-}
+//   return cardElement
+// }
 
-function renderCard (card) {
-  cardList.prepend(addCard(card));
+const cardTemplateSelector = '#card-template'
+
+function renderCard (data) {
+  const cardElement = new Card(data, cardTemplateSelector)
+  cardList.prepend(cardElement.getCardElement);
 }
 
 // default cards
@@ -150,12 +170,12 @@ const initialCards = [
 ];
 
 const populateCard = () => {
-  initialCards.forEach((item) => {
+  initialCards.forEach((data) => {
     const cardPropsObject = {
-      name: item.name,
-      link: item.link,
+      name: data.name,
+      link: data.link,
     };
-    cardList.append(addCard(cardPropsObject));
+    cardList.append(cardPropsObject.getCardElement);
   });
 };
 populateCard();
@@ -164,7 +184,7 @@ populateCard();
 
 openAddFormButton.addEventListener('click',() => {
   openPopup(addPopup)
-  checkInitialFormValidity(addPopup.querySelector('form'), validationSettings)
+  addCardFormValidator.checkInitialFormValidity()
 });
 addCloseButton.addEventListener('click', handleCloseByClick);
 addOverlay.addEventListener('click', handleCloseByClick);
