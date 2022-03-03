@@ -63,8 +63,8 @@ class FormValidator {
   checkInitialFormValidity() {
     const {inputSelector, submitButtonSelector} = this._settings
 
-    const inputElements = [...formElement.querySelectorAll(inputSelector)];
-    const submitButtonElement = formElement.querySelector(submitButtonSelector);
+    const inputElements = [...this._formElement.querySelectorAll(inputSelector)];
+    const submitButtonElement = this._formElement.querySelector(submitButtonSelector);
 
     this._toggleButtonState(inputElements, submitButtonElement);
   }
