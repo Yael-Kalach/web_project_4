@@ -6,7 +6,7 @@ export class Card {
     this._link = link
     this._templateCardSelector = templateCardSelector
     // template
-    this._cardTemplate = document.querySelector(templateCardSelector).content;
+    this._cardTemplate = document.querySelector(this._templateCardSelector).content;
     this._cardElement = this._cardTemplate.querySelector('.elements__card').cloneNode(true);
     // content
     this._cardTitle = this._cardElement.querySelector('.elements__text');
@@ -16,7 +16,7 @@ export class Card {
     this._cardTrashButton = this._cardElement.querySelector('.elements__button_trash');
   }
 
-  _handleLikeButton = evt => evt.target.classList.toggle("elements__button_like_active");
+  _handleLikeButton = () => this._cardLikeButton.classList.toggle("elements__button_like_active");
 
   _handleDeleteCard = () => this._cardElement.remove();
 
@@ -29,20 +29,19 @@ export class Card {
 
   _addEventListeners = () => {
     // like button
-    cardLikeButton.addEventListener("click", this._handleLikeButton());
+    this._cardLikeButton.addEventListener('click', this._handleLikeButton);
     // trash button
-    cardTrashButton.addEventListener('click', this._handleDeleteCard());
+    this._cardTrashButton.addEventListener('click', this._handleDeleteCard);
     // image
-    cardImage.addEventListener('click', this._handleImagePopup())
+    this._cardImage.addEventListener('click', this._handleImagePopup)
   }
 
   getCardElement = () => {
-    cardImage.src = this.link;
-    cardImage.alt = this.name;
-    cardTitle.textContent = this.name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardTitle.textContent = this._name;
 
     this._addEventListeners()
-
     return this._cardElement
   }
 

@@ -58,8 +58,8 @@ const inputImage = document.querySelector('.form__input_type_image');
 openEditFormButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
+  editFormValidator.checkInitialFormValidity()
   openPopup(editPopup);
-  checkInitialFormValidity(editPopup.querySelector('form'), settings);
 });
 
 // Profile form
@@ -81,7 +81,7 @@ const cardTemplateSelector = ('#card-template')
 
 function renderCard (data) {
   const cardElement = new Card(data, cardTemplateSelector);
-  cardList.prepend(cardElement.getCardElement);
+  return cardElement.getCardElement()
 }
 
 // default cards
@@ -127,8 +127,8 @@ populateCard();
 // add popup
 
 openAddFormButton.addEventListener('click',() => {
+  addCardFormValidator.checkInitialFormValidity()
   openPopup(addPopup)
-  checkInitialFormValidity(addPopup.querySelector('form'), settings)
 });
 addCloseButton.addEventListener('click', handleCloseByClick);
 addOverlay.addEventListener('click', handleCloseByClick);
@@ -137,8 +137,9 @@ addOverlay.addEventListener('click', handleCloseByClick);
 
 function handleAddCardSubmit(event) {
   event.preventDefault();
-
-  renderCard({name: inputTitle.value, link: inputImage.value})
+  cardList.prepend(renderCard({
+    name: inputTitle.value, 
+    link: inputImage.value}));
 
   inputTitle.value = "";
   inputImage.value = "";
