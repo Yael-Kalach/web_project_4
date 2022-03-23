@@ -12,18 +12,18 @@ export class Popup {
 
   open(){
     this._popupElement.classList.add('popup_visible');
-    document.addEventListener('keyup', this._handleEscClose)
+    document.addEventListener('keydown', this._handleEscClose)
   }
 
   close(){
     this._popupElement.classList.remove('popup_visible');
-    document.removeEventListener('keyup', this._handleEscClose)
+    document.removeEventListener('keydown', this._handleEscClose)
   }
 
   setEventListeners(){
     this._popupElement.addEventListener('click', (event) => {
-      if(event.target.classList.contains('popup__close-button') || !event.target.classList.contains('popup__container')) {
-        this.close(this._popupElement)
+      if(event.target.classList.contains('popup__overlay') || event.target.classList.contains('popup__close-button')) {
+        this.close()
       }
     })
   }

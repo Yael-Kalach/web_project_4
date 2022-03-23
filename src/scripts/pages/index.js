@@ -36,8 +36,6 @@ const addCardForm = document.querySelector(".add-form")
       imageCloseButton,
       inputTitle,
       inputImage,
-      profileName,
-      profileAbout
     } from "../utils/utils.js"
 
     //Card
@@ -45,8 +43,7 @@ const addCardForm = document.querySelector(".add-form")
 
     //misc
     // import { data } from "autoprefixer"
-
-    //import "../../pages/index.css"
+      import "../../pages/index.css"
 
 
 const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'})
@@ -55,7 +52,6 @@ const userInfo = new UserInfo({name: '.profile__name', about: '.profile__about'}
 const imagePopup = new PopupWithImage('.image-popup');
 const editPopup = new PopupWithForm('.edit-popup', (data) => {
   userInfo.setUserInfo(data);
-  debugger
 });
 const addPopup = new PopupWithForm('.add-popup', () => {
   cardList.addItem(renderCard({
