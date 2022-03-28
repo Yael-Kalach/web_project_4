@@ -6,6 +6,7 @@ export class PopupWithImage extends Popup {
     const captionElement = this._popupElement.querySelector('.image-popup__caption')
 
     imageElement.src = link
+    imageElement.alt = text
     captionElement.textContent = text
 
     super.open()

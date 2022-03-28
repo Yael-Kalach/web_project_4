@@ -17,7 +17,10 @@ export class Card {
 
   _handleLikeButton = () => this._cardLikeButton.classList.toggle("elements__button_like_active");
 
-  _handleDeleteCard = () => this._cardElement.remove();
+  _handleDeleteCard = () => {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
 
   _addEventListeners = () => {
     // like button

@@ -11,6 +11,9 @@ export const inputImage = document.querySelector('.form__input_type_image');
 // edit form
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__about');
+// forms
+export const editForm = document.querySelector(".edit-form")
+export const addCardForm = document.querySelector(".add-form")
 
 export const settings = {
   formSelector: ".form",
