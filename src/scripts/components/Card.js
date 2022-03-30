@@ -1,7 +1,7 @@
 export class Card {
   constructor({data}, templateCardSelector, handleCardClick){
-    this._name = data.name
-    this._link = data.link
+    this._title = data.title
+    this._image = data.image
     this._templateCardSelector = templateCardSelector
     this._handleCardClick = handleCardClick
     // template
@@ -32,9 +32,9 @@ export class Card {
   }
 
   getCardElement = () => {
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
-    this._cardTitle.textContent = this._name;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
+    this._cardTitle.textContent = this._title;
 
     this._addEventListeners()
     return this._cardElement

@@ -5,8 +5,6 @@ import {
   initialCards,
   openEditFormButton,
   openAddFormButton,
-  inputTitle,
-  inputImage,
   editForm,
   addCardForm
 } from "../scripts/utils/utils.js"
@@ -34,7 +32,7 @@ addCardFormValidator.enableValidation()
 const cardTemplateSelector = ('#card-template')
 
 // user info
-const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.profile__about'})
+const userInfo = new UserInfo({titleSelector: '.profile__title', aboutSelector: '.profile__about'})
 
 // popups
 const imagePopup = new PopupWithImage('.image-popup');
@@ -66,30 +64,20 @@ openAddFormButton.addEventListener('click', () => {
 // Section rendering
 function renderCard (data) {
   const cardElement = new Card({data}, cardTemplateSelector, () => {
-    imagePopup.open(data.link, data.name)
+    imagePopup.open(data.image, data.title)
   });
   return cardElement.getCardElement()
 }
 
 const cardList = new Section ({
   items: initialCards,
-  renderer: () => {
-    const cardElement = new Card({}, cardTemplateSelector, () => {
-      renderCard()
-      })
-    return cardElement.getCardElement()
+  renderer: (item) => {
+    const cardPropsObject = {
+      title: item.title,
+      image: item.image,
+    };
+    cardList.addItem(renderCard(cardPropsObject));
     }
   }, '.elements'
 );
-cardList.renderItems(renderCard(initialCards))
-
-// const populateCard = () => {
-//   initialCards.forEach((item) => {
-//     const cardPropsObject = {
-//       name: item.name,
-//       link: item.link,
-//     };
-//     cardList.addItem(renderCard(cardPropsObject));
-//   });
-// };
-// populateCard();
+cardList.renderItems()

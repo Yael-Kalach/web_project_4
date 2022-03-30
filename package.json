@@ -18,8 +18,7 @@
   },
   "homepage": "https://github.com/Yael-Kalach/web_project_4#readme",
   "dependencies": {
-    "core-js": "^3.21.1",
-    "jquery": "^3.6.0"
+    "core-js": "^3.21.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

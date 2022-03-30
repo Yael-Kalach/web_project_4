@@ -9,7 +9,7 @@ export const imageCloseButton = document.querySelector('.image-popup__close-butt
 export const inputTitle = document.querySelector('.form__input_type_title');
 export const inputImage = document.querySelector('.form__input_type_image');
 // edit form
-export const profileName = document.querySelector('.profile__name');
+export const profileName = document.querySelector('.profile__title');
 export const profileAbout = document.querySelector('.profile__about');
 // forms
 export const editForm = document.querySelector(".edit-form")
@@ -26,27 +26,27 @@ export const settings = {
 
 export const initialCards = [
   {
-    name: "Yosemite Valley",
-    link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
+    title: "Yosemite Valley",
+    image: "https://code.s3.yandex.net/web-code/yosemite.jpg"
   },
   {
-    name: "Lake Louise",
-    link: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
+    title: "Lake Louise",
+    image: "https://code.s3.yandex.net/web-code/lake-louise.jpg"
   },
   {
-    name: "Bald Mountains",
-    link: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
+    title: "Bald Mountains",
+    image: "https://code.s3.yandex.net/web-code/bald-mountains.jpg"
   },
   {
-    name: "Latemar",
-    link: "https://code.s3.yandex.net/web-code/latemar.jpg"
+    title: "Latemar",
+    image: "https://code.s3.yandex.net/web-code/latemar.jpg"
   },
   {
-    name: "Vanoise National Park",
-    link: "https://code.s3.yandex.net/web-code/vanoise.jpg"
+    title: "Vanoise National Park",
+    image: "https://code.s3.yandex.net/web-code/vanoise.jpg"
   },
   {
-    name: "Lago di Braies",
-    link: "https://code.s3.yandex.net/web-code/lago.jpg"
+    title: "Lago di Braies",
+    image: "https://code.s3.yandex.net/web-code/lago.jpg"
   }
 ];
