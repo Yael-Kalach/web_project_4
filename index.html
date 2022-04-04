@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Around The U.S.</title>
+  <script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+  <body class="page">
+      <header class="header">
+        <img class="header__logo" src="images/logo.4e8e0a1d604782a0dff8.svg" alt="Arount the U.S. Logo">
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img class="profile__picture" src="images/Avatar.62c15473d5858be88363.png" alt="Profile Picture">
+          <div class="profile__info">
+            <h1 class="profile__name">Jacques Cousteau</h1>
+            <button type="button" aria-label="edit" class="profile__button profile__button_type_edit"></button>
+            <p class="profile__about">Explorer</p>
+          </div>
+          <button type="button" aria-label="add" class="profile__button profile__button_type_add"></button>
+        </section>
+        <div class="popup edit-popup">
+          <div class="popup__overlay edit-popup__overlay"></div>
+          <div class="popup__container edit-popup__container">
+            <button type="button" aria-label="close" class="popup__close-button edit-popup__close-button"></button>
+            <form name="form" class="form edit-form">
+              <h2 class="form__title">Edit profile</h2>
+              <fieldset class="form__fieldset">
+                <input id="name-input" type="text" name="name" placeholder="Name" class="form__input_type_name form__input" required minlength="2" maxlength="40">
+                <span id="name-input-error" class="form__error"></span>
+                <input id="description-input" type="text" name="about" placeholder="About me" class="form__input_type_about form__input" required minlength="2" maxlength="200">
+                <span id="description-input-error" class="form__error"></span>
+                <button type="submit" aria-label="save" class="form__button">Save</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="popup add-popup">
+          <div class="popup__overlay add-popup__overlay"></div>
+          <div class="popup__container add-popup__container">
+            <button type="button" aria-label="close" class="popup__close-button add-popup__close-button"></button>
+            <form name="form_add" class="form add-form">
+              <h2 class="form__title">New place</h2>
+              <fieldset class="form__fieldset">
+                <input id="title-input" type="text" name="title" placeholder="Title" class="form__input_type_title form__input" required minlength="1" maxlength="30">
+                <span id="title-input-error" class="form__error"></span>
+                <input id="image-input" type="url" name="image" placeholder="Image link" class="form__input_type_image form__input" required>
+                <span id="image-input-error" class="form__error"></span>
+                <button type="submit" aria-label="create" class="form__button">Create</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        <div class="popup image-popup">
+          <div class="popup__overlay image-popup__overlay"></div>
+          <div class="image-popup__container">
+            <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
+            <img class="image-popup__image">
+            <p class="image-popup__caption"></p>
+          </div>
+        </div>
+        <section class="elements">
+
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyrights">&copy; 2021. Around The U.S.</p>
+      </footer>
+
+      <template id="card-template">
+        <article class="elements__card">
+          <button type="button" aria-label="trash" class="elements__button elements__button_trash"></button>
+          <img class="elements__image">
+          <div class="elements__title">
+            <h2 class="elements__text"></h2>
+            <button type="button" aria-label="like" class="elements__button elements__button_like"></button>
+          </div>
+        </article>
+      </template>
+  </body>
+</html>
