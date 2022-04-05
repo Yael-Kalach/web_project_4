@@ -2,14 +2,15 @@
 //utils
 import {
   settings,
-  initialCards,
   openEditFormButton,
   openAddFormButton,
   editForm,
-  addCardForm
+  addCardForm,
+  initialCards
 } from "../scripts/utils/utils.js"
 import {PopupWithImage} from "../scripts/components/PopupWithImage.js"
 import {PopupWithForm} from "../scripts/components/PopupWithForm.js"
+import {api} from "../scripts/components/Api.js"
 //Form validator
 import FormValidator from "../scripts/components/FormValidator.js"
 // user info
@@ -21,6 +22,14 @@ import {Card} from "../scripts/components/Card.js"
 //misc
 // import { data } from "autoprefixer"
 import "../pages/index.css"
+
+// API
+
+api.getInitialCards()
+  .then(res => {
+    console.log('res', res)
+    cardList.renderItems(res)
+  })
 
 // form validators
 const editFormValidator = new FormValidator(settings, editForm)
@@ -70,7 +79,6 @@ function renderCard (data) {
 }
 
 const cardList = new Section ({
-  items: initialCards,
   renderer: (item) => {
     const cardPropsObject = {
       title: item.title,
@@ -80,4 +88,3 @@ const cardList = new Section ({
     }
   }, '.elements'
 );
-cardList.renderItems()
