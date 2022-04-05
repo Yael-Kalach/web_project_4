@@ -24,12 +24,18 @@ import {Card} from "../scripts/components/Card.js"
 import "../pages/index.css"
 
 // API
-
 api.getInitialCards()
   .then(res => {
     console.log('res', res)
     cardList.renderItems(res)
   })
+
+api.getUserInformation()
+.then(res => {
+  console.log('res', res)
+  userInfo.setUserInfo({userName: res.name, userAbout: res.about});
+})
+
 
 // form validators
 const editFormValidator = new FormValidator(settings, editForm)
@@ -41,7 +47,7 @@ addCardFormValidator.enableValidation()
 const cardTemplateSelector = ('#card-template')
 
 // user info
-const userInfo = new UserInfo({titleSelector: '.profile__title', aboutSelector: '.profile__about'})
+const userInfo = new UserInfo({nameSelector: '.profile__title', aboutSelector: '.profile__about'})
 
 // popups
 const imagePopup = new PopupWithImage('.image-popup');
@@ -73,7 +79,7 @@ openAddFormButton.addEventListener('click', () => {
 // Section rendering
 function renderCard (data) {
   const cardElement = new Card({data}, cardTemplateSelector, () => {
-    imagePopup.open(data.image, data.title)
+    imagePopup.open(data.link, data.name)
   });
   return cardElement.getCardElement()
 }
@@ -81,8 +87,8 @@ function renderCard (data) {
 const cardList = new Section ({
   renderer: (item) => {
     const cardPropsObject = {
-      title: item.title,
-      image: item.image,
+      name: item.name,
+      link: item.link,
     };
     cardList.addItem(renderCard(cardPropsObject));
     }
