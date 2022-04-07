@@ -44,6 +44,14 @@
 
 @import url(../blocks/image-popup/__close-button/image-popup__close-button.css);
 
+@import url(../blocks/delete-card-popup/__container/delete-card-popup__container.css);
+
+@import url(../blocks/delete-card-form/delete-card-form.css);
+
+@import url(../blocks/delete-card-form/__title/delete-card-form__title.css);
+
+@import url(../blocks/delete-card-form/__button/delete-card-form__button.css);
+
 @import url(../blocks/form/form.css);
 
 @import url(../blocks/form/__title/form__title.css);

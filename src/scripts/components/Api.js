@@ -20,6 +20,25 @@ class Api {
       .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
       .catch(console.log)
   }
+
+  createCard(data){
+    return fetch (`${this._baseUrl}/cards`, {
+      headers: this._headers,
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .catch(console.log)
+  }
+
+  deleteCard(cardId){
+    return fetch (`${this._baseUrl}/cards/${cardId}`, {
+      headers: this._headers,
+      method: 'DELETE',
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .catch(console.log)
+  }
 }
 
 export const api = new Api({

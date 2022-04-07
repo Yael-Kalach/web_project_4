@@ -6,10 +6,10 @@ import {
   openAddFormButton,
   editForm,
   addCardForm,
-  initialCards
 } from "../scripts/utils/utils.js"
 import {PopupWithImage} from "../scripts/components/PopupWithImage.js"
 import {PopupWithForm} from "../scripts/components/PopupWithForm.js"
+import {PopupWithSubmit} from "../scripts/components/PopupWithSubmit.js"
 import {api} from "../scripts/components/Api.js"
 //Form validator
 import FormValidator from "../scripts/components/FormValidator.js"
@@ -24,18 +24,15 @@ import {Card} from "../scripts/components/Card.js"
 import "../pages/index.css"
 
 // API
-api.getInitialCards()
-  .then(res => {
-    console.log('res', res)
-    cardList.renderItems(res)
+let userId
+
+Promise.all([api.getInitialCards(), api.getUserInformation()])
+  .then(([cardData, userData]) => {
+    console.log('cardData', cardData)
+    userId = userData._id
+    cardList.renderItems(cardData)
+    userInfo.setUserInfo({name: userData.name, about: userData.about});
   })
-
-api.getUserInformation()
-.then(res => {
-  console.log('res', res)
-  userInfo.setUserInfo({userName: res.name, userAbout: res.about});
-})
-
 
 // form validators
 const editFormValidator = new FormValidator(settings, editForm)
@@ -47,18 +44,25 @@ addCardFormValidator.enableValidation()
 const cardTemplateSelector = ('#card-template')
 
 // user info
-const userInfo = new UserInfo({nameSelector: '.profile__title', aboutSelector: '.profile__about'})
+const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.profile__about'})
 
 // popups
 const imagePopup = new PopupWithImage('.image-popup');
+
 const editPopup = new PopupWithForm('.edit-popup', (data) => {
   userInfo.setUserInfo(data);
   editPopup.close()
 });
+
 const addPopup = new PopupWithForm('.add-popup', (data) => {
-  cardList.addItem(renderCard(data));
+  api.createCard(data)
+    .then(res => {
+      cardList.addItem(renderCard(res));
+    })
   addPopup.close()
 });
+
+const confirmPopup = new PopupWithSubmit('.delete-card-popup');
 
 // Event Listeners
 imagePopup.setEventListeners()
@@ -66,6 +70,8 @@ imagePopup.setEventListeners()
 editPopup.setEventListeners()
 
 addPopup.setEventListeners()
+
+confirmPopup.setEventListeners()
 
 // buttons
 openEditFormButton.addEventListener('click', () => {
@@ -78,9 +84,21 @@ openAddFormButton.addEventListener('click', () => {
 
 // Section rendering
 function renderCard (data) {
-  const cardElement = new Card({data}, cardTemplateSelector, () => {
+  const cardElement = new Card({data,
+    handleCardClick: () => {
     imagePopup.open(data.link, data.name)
-  });
+  },
+    handleDeleteCard: (id) => {
+    confirmPopup.open()
+
+    confirmPopup.setAction(() => {
+      api.deleteCard(id)
+      .then(res => {
+        cardElement.removeCard(res)
+        confirmPopup.close()
+      })
+    })
+  }}, cardTemplateSelector, userId);
   return cardElement.getCardElement()
 }
 
