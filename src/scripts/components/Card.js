@@ -2,7 +2,7 @@ export class Card {
   constructor({data, handleCardClick, handleDeleteCard}, templateCardSelector, userId){
     this._name = data.name
     this._link = data.link
-    this._ownerId = data.owner
+    this._ownerId = data.owner._id
     this._id = data._id
     this._templateCardSelector = templateCardSelector
     this._handleCardClick = handleCardClick
