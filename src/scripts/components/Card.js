@@ -1,14 +1,15 @@
 export class Card {
-  constructor({data, handleCardClick, handleDeleteCard}, templateCardSelector, userId){
+  constructor({data, handleCardClick, handleDeleteCard, handleLikeButton}, templateCardSelector, userId){
     this._name = data.name
     this._link = data.link
+    this._likes = data.likes
     this._ownerId = data.owner._id
     this._id = data._id
     this._templateCardSelector = templateCardSelector
     this._handleCardClick = handleCardClick
+    this._handleLikeButton = handleLikeButton
     this._handleDeleteCard = handleDeleteCard
     this._userId = userId
-    console.log('this._ownerId', this._ownerId)
     // template
     this._cardTemplate = document.querySelector(this._templateCardSelector).content;
     this._cardElement = this._cardTemplate.querySelector('.elements__card').cloneNode(true);
@@ -18,15 +19,19 @@ export class Card {
     // buttons
     this._cardLikeButton = this._cardElement.querySelector('.elements__button_like');
     this._cardTrashButton = this._cardElement.querySelector('.elements__button_trash');
+    //like counter
+    this._likeCounter = this._cardElement.querySelector('.elements__counter');
   }
 
-  _handleLikeButton = () => this._cardLikeButton.classList.toggle("elements__button_like_active");
+  //_handleLikeButton = () => this._cardLikeButton.classList.toggle("elements__button_like_active");
 
   _addEventListeners = () => {
     // like button
-    this._cardLikeButton.addEventListener('click', () => this._handleLikeButton);
+    this._cardLikeButton.addEventListener('click', () => this._handleLikeButton(this._id));
     // trash button
-    this._cardTrashButton.addEventListener('click', () => this._handleDeleteCard(this._id));
+    if (this._userId === this._ownerId) {
+      this._cardTrashButton.addEventListener('click', () => this._handleDeleteCard(this._id));
+    };
     // image
     this._cardLink.addEventListener('click', () => this._handleCardClick())
   }
@@ -40,6 +45,8 @@ export class Card {
     this._cardLink.src = this._link;
     this._cardLink.alt = this._name;
     this._cardName.textContent = this._name;
+
+    this._likeCounter.textContent = this._likes.length
 
     if(this._ownerId !== this._userId){
       this._cardTrashButton.style.display = 'none'

@@ -4,6 +4,7 @@ import {
   settings,
   openEditFormButton,
   openAddFormButton,
+  openAvatarFormButton,
   editForm,
   addCardForm,
 } from "../scripts/utils/utils.js"
@@ -20,18 +21,19 @@ import {Section} from "../scripts/components/Section.js"
 //Card
 import {Card} from "../scripts/components/Card.js"
 //misc
-// import { data } from "autoprefixer"
 import "../pages/index.css"
+import { data } from "autoprefixer"
 
 // API
 let userId
 
-Promise.all([api.getInitialCards(), api.getUserInformation()])
+Promise.all([api.getInitialCards(), api.getUserInformation(), api.getUserAvatar()])
   .then(([cardData, userData]) => {
     console.log('cardData', cardData)
     userId = userData._id
-    cardList.renderItems(cardData)
+    cardList.renderItems(cardData);
     userInfo.setUserInfo({name: userData.name, about: userData.about});
+    userInfo.setAvatar({avatar: userData.avatar})
   })
 
 // form validators
@@ -44,7 +46,7 @@ addCardFormValidator.enableValidation()
 const cardTemplateSelector = ('#card-template')
 
 // user info
-const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.profile__about'})
+const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.profile__about', avatarSelector: '.profile__picture'})
 
 // popups
 const imagePopup = new PopupWithImage('.image-popup');
@@ -62,6 +64,11 @@ const addPopup = new PopupWithForm('.add-popup', (data) => {
   addPopup.close()
 });
 
+const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
+  userInfo.setAvatar(data)
+  avatarPopup.close()
+})
+
 const confirmPopup = new PopupWithSubmit('.delete-card-popup');
 
 // Event Listeners
@@ -73,6 +80,8 @@ addPopup.setEventListeners()
 
 confirmPopup.setEventListeners()
 
+avatarPopup.setEventListeners()
+
 // buttons
 openEditFormButton.addEventListener('click', () => {
   editPopup.open()
@@ -82,6 +91,9 @@ openAddFormButton.addEventListener('click', () => {
   addPopup.open()
 })
 
+openAvatarFormButton.addEventListener('click', () => {
+  avatarPopup.open()
+})
 // Section rendering
 function renderCard (data) {
   const cardElement = new Card({data,
@@ -98,7 +110,15 @@ function renderCard (data) {
         confirmPopup.close()
       })
     })
-  }}, cardTemplateSelector, userId);
+  },
+    handleLikeButton: (id) => {
+      api.likeCard(id)
+        .then(res => {
+          console.log('res', res)
+        })
+    }
+
+  }, cardTemplateSelector, userId);
   return cardElement.getCardElement()
 }
 

@@ -9,7 +9,7 @@ class Api {
     return fetch (`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
       .catch(console.log)
   }
 
@@ -17,7 +17,15 @@ class Api {
     return fetch (`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .catch(console.log)
+  }
+
+  getUserAvatar(){
+    return fetch (`${this._baseUrl}/users/me/avatar`, {
+      headers: this._headers,
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
       .catch(console.log)
   }
 
@@ -27,7 +35,7 @@ class Api {
       method: 'POST',
       body: JSON.stringify(data)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
       .catch(console.log)
   }
 
@@ -36,7 +44,25 @@ class Api {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => res.ok ? res.json() : Promise.reject(res.statusText))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .catch(console.log)
+  }
+
+  likeCard(cardId){
+    return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+      headers: this._headers,
+      method: 'PUT',
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .catch(console.log)
+  }
+
+  unlikeCard(cardId){
+    return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+      headers: this._headers,
+      method: 'DELETE',
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
       .catch(console.log)
   }
 }

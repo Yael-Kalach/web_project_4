@@ -2,6 +2,7 @@ export const profileSelector = document.querySelector('.profile');
 export const cardListSelector = document.querySelector('.elements');
 export const openEditFormButton = document.querySelector('.profile__button_type_edit');
 export const openAddFormButton = document.querySelector('.profile__button_type_add');
+export const openAvatarFormButton = document.querySelector('.profile__button_type_avatar');
 export const editCloseButton = document.querySelector('.edit-popup__close-button');
 export const addCloseButton = document.querySelector('.add-popup__close-button');
 export const imageCloseButton = document.querySelector('.image-popup__close-button');
