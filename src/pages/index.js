@@ -7,7 +7,8 @@ import {
   openAvatarFormButton,
   editForm,
   addCardForm,
-} from "../scripts/utils/utils.js"
+  avatarForm
+} from "../scripts/utils/constants.js"
 import {PopupWithImage} from "../scripts/components/PopupWithImage.js"
 import {PopupWithForm} from "../scripts/components/PopupWithForm.js"
 import {PopupWithSubmit} from "../scripts/components/PopupWithSubmit.js"
@@ -27,7 +28,7 @@ import { data } from "autoprefixer"
 // API
 let userId
 
-Promise.all([api.getInitialCards(), api.getUserInformation(), api.getUserAvatar()])
+Promise.all([api.getInitialCards(), api.getUserInformation()])
   .then(([cardData, userData]) => {
     console.log('cardData', cardData)
     userId = userData._id
@@ -35,12 +36,16 @@ Promise.all([api.getInitialCards(), api.getUserInformation(), api.getUserAvatar(
     userInfo.setUserInfo({name: userData.name, about: userData.about});
     userInfo.setAvatar({avatar: userData.avatar})
   })
+  .catch(console.log)
+
 
 // form validators
 const editFormValidator = new FormValidator(settings, editForm)
 const addCardFormValidator = new FormValidator(settings, addCardForm)
+const avatarFormValidator = new FormValidator(settings, avatarForm)
 editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
+avatarFormValidator.enableValidation()
 
 // card template
 const cardTemplateSelector = ('#card-template')
@@ -56,7 +61,10 @@ const editPopup = new PopupWithForm('.edit-popup', (data) => {
     .then(res => {
       userInfo.setUserInfo(res);
     })
-  editPopup.close()
+    .then(() => {
+      editPopup.close()
+      editFormValidator.resetValidation()
+    })
 });
 
 const addPopup = new PopupWithForm('.add-popup', (data) => {
@@ -64,7 +72,10 @@ const addPopup = new PopupWithForm('.add-popup', (data) => {
     .then(res => {
       cardList.addItem(renderCard(res));
     })
-  addPopup.close()
+    .then(()=> {
+      addPopup.close()
+      addCardFormValidator.resetValidation()
+    })
 });
 
 const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
@@ -72,7 +83,10 @@ const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
     .then(res => {
       userInfo.setAvatar(res)
     })
-  avatarPopup.close()
+    .then(() => {
+      avatarPopup.close()
+      avatarFormValidator.resetValidation()
+    })
 })
 
 const confirmPopup = new PopupWithSubmit('.delete-card-popup');
@@ -91,14 +105,17 @@ avatarPopup.setEventListeners()
 // buttons
 openEditFormButton.addEventListener('click', () => {
   editPopup.open('Save')
+  editFormValidator.checkInitialFormValidity()
 })
 
 openAddFormButton.addEventListener('click', () => {
   addPopup.open('Create')
+  addCardFormValidator.checkInitialFormValidity()
 })
 
 openAvatarFormButton.addEventListener('click', () => {
   avatarPopup.open('Save')
+  avatarFormValidator.checkInitialFormValidity()
 })
 // Section rendering
 function renderCard (data) {

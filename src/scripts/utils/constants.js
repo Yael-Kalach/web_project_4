@@ -14,6 +14,7 @@ export const profileName = document.querySelector('.profile__title');
 export const profileAbout = document.querySelector('.profile__about');
 // forms
 export const editForm = document.querySelector(".edit-form")
+export const avatarForm = document.querySelector(".avatar-form")
 export const addCardForm = document.querySelector(".add-form")
 
 export const settings = {

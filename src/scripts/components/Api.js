@@ -5,28 +5,25 @@ class Api {
     this._headers = headers
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error ${res.status}`);
+  }
+
   getInitialCards() {
     return fetch (`${this._baseUrl}/cards`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   getUserInformation() {
     return fetch (`${this._baseUrl}/users/me`, {
       headers: this._headers
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
-  }
-
-  getUserAvatar(){
-    return fetch (`${this._baseUrl}/users/me/avatar`, {
-      headers: this._headers
-    })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   editUserInformation(data){
@@ -35,8 +32,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   editUserAvatar(data){
@@ -45,8 +41,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   createCard(data){
@@ -55,8 +50,7 @@ class Api {
       method: 'POST',
       body: JSON.stringify(data)
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   deleteCard(cardId){
@@ -64,8 +58,7 @@ class Api {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   likeCard(cardId){
@@ -73,8 +66,7 @@ class Api {
       headers: this._headers,
       method: 'PUT',
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 
   unlikeCard(cardId){
@@ -82,8 +74,7 @@ class Api {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
-      .catch(console.log)
+      .then(this._checkResponse)
   }
 }
 
