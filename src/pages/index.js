@@ -52,7 +52,10 @@ const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.
 const imagePopup = new PopupWithImage('.image-popup');
 
 const editPopup = new PopupWithForm('.edit-popup', (data) => {
-  userInfo.setUserInfo(data);
+  api.editUserInformation(data)
+    .then(res => {
+      userInfo.setUserInfo(res);
+    })
   editPopup.close()
 });
 
@@ -65,7 +68,10 @@ const addPopup = new PopupWithForm('.add-popup', (data) => {
 });
 
 const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
-  userInfo.setAvatar(data)
+  api.editUserAvatar(data)
+    .then(res => {
+      userInfo.setAvatar(res)
+    })
   avatarPopup.close()
 })
 

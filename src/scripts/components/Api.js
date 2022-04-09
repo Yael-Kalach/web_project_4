@@ -23,7 +23,27 @@ class Api {
 
   getUserAvatar(){
     return fetch (`${this._baseUrl}/users/me/avatar`, {
+      headers: this._headers
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .catch(console.log)
+  }
+
+  editUserInformation(data){
+    return fetch (`${this._baseUrl}/users/me`, {
+      method: "PATCH",
       headers: this._headers,
+      body: JSON.stringify(data)
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .catch(console.log)
+  }
+
+  editUserAvatar(data){
+    return fetch (`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify(data)
     })
       .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
       .catch(console.log)
