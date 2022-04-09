@@ -84,15 +84,15 @@ avatarPopup.setEventListeners()
 
 // buttons
 openEditFormButton.addEventListener('click', () => {
-  editPopup.open()
+  editPopup.open('Save')
 })
 
 openAddFormButton.addEventListener('click', () => {
-  addPopup.open()
+  addPopup.open('Create')
 })
 
 openAvatarFormButton.addEventListener('click', () => {
-  avatarPopup.open()
+  avatarPopup.open('Save')
 })
 // Section rendering
 function renderCard (data) {
@@ -101,8 +101,7 @@ function renderCard (data) {
     imagePopup.open(data.link, data.name)
   },
     handleDeleteCard: (id) => {
-    confirmPopup.open()
-
+    confirmPopup.open('Yes')
     confirmPopup.setAction(() => {
       api.deleteCard(id)
       .then(res => {
@@ -112,12 +111,21 @@ function renderCard (data) {
     })
   },
     handleLikeButton: (id) => {
-      api.likeCard(id)
-        .then(res => {
-          console.log('res', res)
-        })
-    }
+      const isAlreadyLiked = cardElement.isLiked()
 
+        if (isAlreadyLiked){
+          api.unlikeCard(id)
+          .then(res => {
+            cardElement.rmoveLikeCard(res.likes)
+          })
+        }
+        else{
+          api.likeCard(id)
+          .then(res => {
+            cardElement.addLikeCard(res.likes)
+          })
+        }
+    }
   }, cardTemplateSelector, userId);
   return cardElement.getCardElement()
 }
@@ -127,6 +135,9 @@ const cardList = new Section ({
     const cardPropsObject = {
       name: item.name,
       link: item.link,
+      owner: item.owner,
+      likes: item.likes,
+      _id: item._id
     };
     cardList.addItem(renderCard(cardPropsObject));
     }
