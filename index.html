@@ -11,7 +11,10 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__picture" src="images/Avatar.62c15473d5858be88363.png" alt="Profile Picture">
+          <div class="profile__avatar">
+            <img class="profile__picture" src="images/Avatar.62c15473d5858be88363.png" alt="Profile Picture">
+            <button type="button" aria-label="avatar" class="profile__button profile__button_type_avatar"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button type="button" aria-label="edit" class="profile__button profile__button_type_edit"></button>
@@ -35,6 +38,20 @@
             </form>
           </div>
         </div>
+        <div class="popup avatar-popup">
+          <div class="popup__overlay avatar-popup__overlay"></div>
+          <div class="popup__container avatar-popup__container">
+            <button type="button" aria-label="close" class="popup__close-button avatar-popup__close-button"></button>
+            <form name="form" class="form avatar-form">
+              <h2 class="form__title">Change profile picture</h2>
+              <fieldset class="form__fieldset">
+                <input id="avatar-input" type="url" name="avatar" placeholder="Avatar link" class="form__input_type_avatar form__input" required>
+                <span id="avatar-input-error" class="form__error"></span>
+                <button type="submit" aria-label="save" class="form__button">Save</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
         <div class="popup add-popup">
           <div class="popup__overlay add-popup__overlay"></div>
           <div class="popup__container add-popup__container">
@@ -42,9 +59,9 @@
             <form name="form_add" class="form add-form">
               <h2 class="form__title">New place</h2>
               <fieldset class="form__fieldset">
-                <input id="title-input" type="text" name="title" placeholder="Title" class="form__input_type_title form__input" required minlength="1" maxlength="30">
+                <input id="title-input" type="text" name="name" placeholder="Title" class="form__input_type_title form__input" required minlength="1" maxlength="30">
                 <span id="title-input-error" class="form__error"></span>
-                <input id="image-input" type="url" name="image" placeholder="Image link" class="form__input_type_image form__input" required>
+                <input id="image-input" type="url" name="link" placeholder="Image link" class="form__input_type_image form__input" required>
                 <span id="image-input-error" class="form__error"></span>
                 <button type="submit" aria-label="create" class="form__button">Create</button>
               </fieldset>
@@ -57,6 +74,16 @@
             <button type="button" aria-label="close" class="popup__close-button image-popup__close-button"></button>
             <img class="image-popup__image">
             <p class="image-popup__caption"></p>
+          </div>
+        </div>
+        <div class="popup delete-card-popup">
+          <div class="popup__overlay delete-card-popup__overlay"></div>
+          <div class="popup__container delete-card-popup__container">
+            <button type="button" aria-label="close" class="popup__close-button delete-card-popup__close-button"></button>
+            <form name="form_confirm" class="form delete-card-form">
+              <h2 class="delete-card-form__title">Are you sure?</h2>
+                <button type="submit" aria-label="create" class="form__button">Yes</button>
+            </form>
           </div>
         </div>
         <section class="elements">
@@ -73,7 +100,10 @@
           <img class="elements__image">
           <div class="elements__title">
             <h2 class="elements__text"></h2>
-            <button type="button" aria-label="like" class="elements__button elements__button_like"></button>
+            <div class="elements__container">
+              <button type="button" aria-label="like" class="elements__button elements__button_like"></button>
+              <span class="elements__counter"></span>
+            </div>
           </div>
         </article>
       </template>
