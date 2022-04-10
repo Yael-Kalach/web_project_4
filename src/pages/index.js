@@ -98,9 +98,9 @@ confirmPopup.setEventListeners()
 avatarPopup.setEventListeners()
 
 // buttons
-openEditFormButton.addEventListener('click', (data) => {
+openEditFormButton.addEventListener('click', () => {
   editPopup.open()
-  userInfo.getUserInfo(editPopup.setInputValues(data))
+  editPopup.setInputValues(userInfo.getUserInfo())
   editFormValidator.resetValidation()
 })
 
