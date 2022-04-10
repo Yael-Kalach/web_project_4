@@ -7,7 +7,8 @@ import {
   openAvatarFormButton,
   editForm,
   addCardForm,
-  avatarForm
+  avatarForm,
+  cardTemplateSelector
 } from "../scripts/utils/constants.js"
 import {PopupWithImage} from "../scripts/components/PopupWithImage.js"
 import {PopupWithForm} from "../scripts/components/PopupWithForm.js"
@@ -47,9 +48,6 @@ editFormValidator.enableValidation()
 addCardFormValidator.enableValidation()
 avatarFormValidator.enableValidation()
 
-// card template
-const cardTemplateSelector = ('#card-template')
-
 // user info
 const userInfo = new UserInfo({nameSelector: '.profile__name', aboutSelector: '.profile__about', avatarSelector: '.profile__picture'})
 
@@ -63,7 +61,6 @@ const editPopup = new PopupWithForm('.edit-popup', (data) => {
     })
     .then(() => {
       editPopup.close()
-      editFormValidator.resetValidation()
     })
 });
 
@@ -74,7 +71,6 @@ const addPopup = new PopupWithForm('.add-popup', (data) => {
     })
     .then(()=> {
       addPopup.close()
-      addCardFormValidator.resetValidation()
     })
 });
 
@@ -85,7 +81,6 @@ const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
     })
     .then(() => {
       avatarPopup.close()
-      avatarFormValidator.resetValidation()
     })
 })
 
@@ -103,19 +98,20 @@ confirmPopup.setEventListeners()
 avatarPopup.setEventListeners()
 
 // buttons
-openEditFormButton.addEventListener('click', () => {
-  editPopup.open('Save')
-  editFormValidator.checkInitialFormValidity()
+openEditFormButton.addEventListener('click', (data) => {
+  editPopup.open()
+  userInfo.getUserInfo(editPopup.setInputValues(data))
+  editFormValidator.resetValidation()
 })
 
 openAddFormButton.addEventListener('click', () => {
-  addPopup.open('Create')
-  addCardFormValidator.checkInitialFormValidity()
+  addPopup.open()
+  addCardFormValidator.resetValidation()
 })
 
 openAvatarFormButton.addEventListener('click', () => {
-  avatarPopup.open('Save')
-  avatarFormValidator.checkInitialFormValidity()
+  avatarPopup.open()
+  avatarFormValidator.resetValidation()
 })
 // Section rendering
 function renderCard (data) {
@@ -127,10 +123,11 @@ function renderCard (data) {
     confirmPopup.open('Yes')
     confirmPopup.setAction(() => {
       api.deleteCard(id)
-      .then(res => {
-        cardElement.removeCard(res)
-        confirmPopup.close()
-      })
+        .then(res => {
+          cardElement.removeCard(res)
+          confirmPopup.close()
+        })
+        .catch(console.log)
     })
   },
     handleLikeButton: (id) => {
@@ -138,15 +135,17 @@ function renderCard (data) {
 
         if (isAlreadyLiked){
           api.unlikeCard(id)
-          .then(res => {
-            cardElement.rmoveLikeCard(res.likes)
-          })
+            .then(res => {
+              cardElement.rmoveLikeCard(res.likes)
+            })
+            .catch(console.log)
         }
         else{
           api.likeCard(id)
-          .then(res => {
-            cardElement.addLikeCard(res.likes)
-          })
+            .then(res => {
+              cardElement.addLikeCard(res.likes)
+            })
+            .catch(console.log)
         }
     }
   }, cardTemplateSelector, userId);

@@ -11,9 +11,9 @@ export class PopupWithForm extends Popup {
     this._inputsValues = {}
   }
 
-  open(btnText){
+  open(){
     super.open()
-    this._submitBtn.textContent = btnText
+    this.renderLoading(false)
   }
 
   renderLoading(isLoading, loadingText='Saving...') {
@@ -31,10 +31,16 @@ export class PopupWithForm extends Popup {
     return this._inputsValues
   }
 
+  setInputValues(data) {
+    this._inputs.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
   setEventListeners(){
     super.setEventListeners();
     this._form.addEventListener('submit', () => {
-      this.renderLoading(this._form)
+      this.renderLoading(true)
       this._submitHandler(this._getInputValues())
     })
   }

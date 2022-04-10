@@ -16,6 +16,8 @@ export const profileAbout = document.querySelector('.profile__about');
 export const editForm = document.querySelector(".edit-form")
 export const avatarForm = document.querySelector(".avatar-form")
 export const addCardForm = document.querySelector(".add-form")
+// card template
+export const cardTemplateSelector = ('#card-template')
 
 export const settings = {
   formSelector: ".form",
