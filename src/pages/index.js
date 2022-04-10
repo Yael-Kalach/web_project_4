@@ -62,6 +62,7 @@ const editPopup = new PopupWithForm('.edit-popup', (data) => {
     .then(() => {
       editPopup.close()
     })
+    .catch(console.log)
 });
 
 const addPopup = new PopupWithForm('.add-popup', (data) => {
@@ -72,6 +73,7 @@ const addPopup = new PopupWithForm('.add-popup', (data) => {
     .then(()=> {
       addPopup.close()
     })
+    .catch(console.log)
 });
 
 const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
@@ -82,6 +84,7 @@ const avatarPopup = new PopupWithForm('.avatar-popup', (data) => {
     .then(() => {
       avatarPopup.close()
     })
+    .catch(console.log)
 })
 
 const confirmPopup = new PopupWithSubmit('.delete-card-popup');
